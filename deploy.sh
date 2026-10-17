@@ -57,9 +57,9 @@ echo "==> Starting / restarting combined server (Next.js + WA bot)..."
 if pm2 describe bishnupur &> /dev/null; then
   pm2 restart bishnupur
 else
-  NODE_OPTIONS="--max-old-space-size=256" \
+  NODE_OPTIONS="--max-old-space-size=256" PORT=2001" \
   pm2 start bishnupur-start.js --name bishnupur \
-    --max-memory-restart 700M
+    --max-memory-restart 500M
 fi
 
 echo "==> Saving PM2 process list..."

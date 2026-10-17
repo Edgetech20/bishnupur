@@ -26,11 +26,12 @@ git stash 2>/dev/null || true
 git pull origin master
 
 # ── Node deps ───────────────────────────────────────────────
-echo "==> Installing dependencies..."
-npm install --production=false
-
-echo "==> Installing WhatsApp bot dependencies..."
-npm install whatsapp-web.js qrcode-terminal qrcode nodemailer mysql2
+if [ ! -d "node_modules" ]; then
+  echo "==> Installing dependencies..."
+  npm install --production=false
+else
+  echo "==> node_modules already present, skipping install."
+fi
 
 # ── Prisma ──────────────────────────────────────────────────
 echo "==> Generating Prisma client..."
@@ -49,22 +50,23 @@ if ! command -v pm2 &> /dev/null; then
   npm install -g pm2
 fi
 
-echo "==> Starting / restarting Next.js app..."
-pm2 describe utsav &> /dev/null \
-  && pm2 restart utsav \
-  || pm2 start npm --name utsav -- start
+# Clean up old separate wa-bot process if it exists
+pm2 delete wa-bot-bishnupur 2>/dev/null || true
 
-echo "==> Starting / restarting WhatsApp bot..."
-pm2 describe wa-bot &> /dev/null \
-  && pm2 restart wa-bot \
-  || pm2 start whatsapp-bot.js --name wa-bot
+echo "==> Starting / restarting combined server (Next.js + WA bot)..."
+if pm2 describe bishnupur &> /dev/null; then
+  pm2 restart bishnupur
+else
+  NODE_OPTIONS="--max-old-space-size=256" \
+  pm2 start bishnupur-start.js --name bishnupur \
+    --max-memory-restart 700M
+fi
 
 echo "==> Saving PM2 process list..."
 pm2 save
 
 echo ""
 echo "==> Done."
-echo "    Next.js → pm2 logs utsav"
-echo "    WA Bot  → pm2 logs wa-bot"
+echo "    Logs → pm2 logs bishnupur"
 echo ""
 echo "    To auto-start on server reboot: pm2 startup"

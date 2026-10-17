@@ -39,10 +39,10 @@ export async function GET() {
 
         {/* Main Bengali title */}
         <div style={{ color: "#E8D5B0", fontSize: 110, letterSpacing: "0.04em", lineHeight: 1.2, marginBottom: 8 }}>
-          প্ৰিয়বোধী
+          বোধি-উৎসর্জ্জী
         </div>
-        <div style={{ color: "#C9A96E", fontSize: 52, letterSpacing: "0.1em", opacity: 0.9, marginBottom: 48 }}>
-          মহোৎসব
+        <div style={{ color: "#C9A96E", fontSize: 40, letterSpacing: "0.1em", opacity: 0.9, marginBottom: 48 }}>
+          বিষ্ণুপুর মহকুমা উৎসব
         </div>
 
         {/* Bottom rule */}

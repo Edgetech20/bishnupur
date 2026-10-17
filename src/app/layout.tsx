@@ -7,26 +7,26 @@ const galada = Galada({ variable: "--font-galada", subsets: ["bengali"], weight:
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://utsav.databind.in"),
-  title: "প্ৰিয়বোধী",
+  title: "বোধি-উৎসর্জ্জী",
   description:
-    "You are cordially invited to Priyabodhi Mahotsav on 20 December 2026 at Galsi, Purba Bardhaman.",
+    "You are cordially invited to বোধি-উৎসর্জ্জী on 20 December 2026 at Bishnupur, West Bengal.",
   openGraph: {
-    title: "প্ৰিয়বোধী মহোৎসব | 20 December 2026",
-    description: "You are cordially invited — Galsi, Purba Bardhaman Sadar North Subdivision.",
+    title: "বোধি-উৎসর্জ্জী বিষ্ণুপুর মহকুমা উৎসব | 20 December 2026",
+    description: "You are cordially invited — Bishnupur, West Bengal 722122.",
     type: "website",
     images: [
       {
         url: "/api/og",
         width: 1200,
         height: 630,
-        alt: "প্ৰিয়বোধী মহোৎসব",
+        alt: "বোধি-উৎসর্জ্জী বিষ্ণুপুর মহকুমা উৎসব",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "প্ৰিয়বোধী মহোৎসব | 20 December 2026",
-    description: "You are cordially invited — Galsi, Purba Bardhaman.",
+    title: "বোধি-উৎসর্জ্জী বিষ্ণুপুর মহকুমা উৎসব | 20 December 2026",
+    description: "You are cordially invited — Bishnupur, West Bengal.",
     images: ["/api/og"],
   },
 };

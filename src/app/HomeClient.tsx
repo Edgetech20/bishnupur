@@ -103,11 +103,11 @@ function drawShareCard(canvas: HTMLCanvasElement, name: string, venue: string) {
   // Event name
   ctx.font = "400 136px 'Galada', serif";
   ctx.fillStyle = goldGrad(cx - 400, cx + 400);
-  ctx.fillText("প্ৰিয়বোধী", cx, 592);
+  ctx.fillText("বোধি-উৎসর্জ্জী", cx, 592);
 
-  ctx.font = "400 68px 'Galada', serif";
+  ctx.font = "400 46px 'Galada', serif";
   ctx.fillStyle = "rgba(201,169,110,0.85)";
-  ctx.fillText("মহোৎসব", cx, 672);
+  ctx.fillText("বিষ্ণুপুর মহকুমা উৎসব", cx, 672);
 
   // Date & venue
   ctx.font = "600 30px 'Geist', system-ui, sans-serif";
@@ -482,11 +482,11 @@ export default function HomeClient({ initialSettings }: { initialSettings: Recor
             <div className="flex-1 h-px w-16" style={{ background: "linear-gradient(90deg, #C9A96E, transparent)" }} />
           </div>
 
-          <h1 className="event-title splash-title mb-2" style={{ fontSize: "clamp(5rem, 28vw, 8rem)", letterSpacing: "0.06em", lineHeight: 1.6 }}>
-            প্ৰিয়বোধী
+          <h1 className="event-title splash-title mb-2" style={{ fontSize: "clamp(3.5rem, 20vw, 8rem)", letterSpacing: "0.06em", lineHeight: 1.6, textAlign: "center" }}>
+            বোধি-উৎসর্জ্জী
           </h1>
-          <p className="shimmer-text font-black mb-10" style={{ fontSize: "clamp(1rem, 4vw, 1.4rem)", letterSpacing: "0.1em" }}>
-            মহোৎসব
+          <p className="shimmer-text font-black mb-10" style={{ fontSize: "clamp(1rem, 4vw, 1.4rem)", letterSpacing: "0.1em", textAlign: "center" }}>
+            বিষ্ণুপুর মহকুমা উৎসব
           </p>
 
           <div style={{ animation: "tap-pulse 2s ease-in-out infinite" }}>
@@ -538,21 +538,23 @@ export default function HomeClient({ initialSettings }: { initialSettings: Recor
               }}
             />
             <h1 className="event-title relative" style={{ fontSize: "clamp(4rem, 18vw, 7rem)", letterSpacing: "0.06em", lineHeight: 1.3, paddingTop: "0.2em" }}>
-              প্ৰিয়বোধী
+              বোধি-উৎসর্জ্জী
             </h1>
           </div>
           <h2 className="shimmer-text font-black" style={{ fontSize: "clamp(1.4rem, 6vw, 2rem)", letterSpacing: "0.06em", lineHeight: 1.6, opacity: 0.85 }}>
-            মহোৎসব
+            বিষ্ণুপুর মহকুমা উৎসব
           </h2>
           <p className="shimmer-text font-semibold" style={{ fontSize: "clamp(0.7rem, 2.5vw, 0.95rem)", letterSpacing: "0.08em", lineHeight: 1.6 }}>
             প্রথম বর্ষ
           </p>
         </div>
 
-        <p className="mt-3 text-sm font-medium tracking-wide" style={{ color: "#C9A96E", opacity: 0.75 }}>
+        {/* <p className="mt-3 text-sm font-medium tracking-wide flex items-center gap-2" style={{ color: "#C9A96E", opacity: 0.75 }}>
+          <span style={{ opacity: 0.5 }}>✦</span>
           Purba Bardhaman Sadar North Subdivision
-        </p>
-
+          <span style={{ opacity: 0.5 }}>✦</span>
+        </p> */}
+        
         {/* Bottom rule */}
         <div className="flex items-center gap-3 w-full max-w-xs mt-8">
           <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, transparent, #C9A96E)" }} />

@@ -8,6 +8,8 @@ import { useToast } from "../toast";
 type Vals = Record<string, string>;
 
 const EVENT_FIELDS = [
+  { key: "event_title",      label: "Event Title (Line 1)", icon: Calendar, placeholder: "প্ৰিয়বোধী" },
+  { key: "event_title_sub",  label: "Event Title (Line 2)", icon: Calendar, placeholder: "মহোৎসব" },
   { key: "event_date",       label: "Display Date",        icon: Calendar, placeholder: "Sunday, 20 December 2026 | ৪ ই পৌষ, ১৪৩৩" },
   { key: "event_date_iso",   label: "ISO Date (countdown)", icon: Calendar, placeholder: "2026-12-20" },
   { key: "event_subtitle",   label: "Subtitle (under title)", icon: MapPin, placeholder: "Purba Bardhaman Sadar North Subdivision" },

@@ -97,7 +97,7 @@ const DEFAULT_CONTACTS = [
   { label: "Email",     key: "contact_email",     fallback: "priyabodhimahotsav@gmail.com" },
 ];
 
-function drawShareCard(canvas: HTMLCanvasElement, name: string, venue: string, date: string) {
+function drawShareCard(canvas: HTMLCanvasElement, name: string, venue: string, date: string, title: string, titleSub: string) {
   const maybeCtx = canvas.getContext("2d");
   if (!maybeCtx) return;
   const ctx: CanvasRenderingContext2D = maybeCtx;
@@ -175,11 +175,11 @@ function drawShareCard(canvas: HTMLCanvasElement, name: string, venue: string, d
   // Event name
   ctx.font = "400 136px 'Galada', serif";
   ctx.fillStyle = goldGrad(cx - 400, cx + 400);
-  ctx.fillText("প্ৰিয়বোধী", cx, 592);
+  ctx.fillText(title, cx, 592);
 
   ctx.font = "400 68px 'Galada', serif";
   ctx.fillStyle = "rgba(201,169,110,0.85)";
-  ctx.fillText("মহোৎসব", cx, 672);
+  ctx.fillText(titleSub, cx, 672);
 
   // Date & venue
   ctx.font = "600 30px 'Geist', system-ui, sans-serif";
@@ -442,7 +442,7 @@ export default function HomeClient({ initialSettings }: { initialSettings: Recor
   useEffect(() => {
     if (rsvpState !== "done" || !canvasRef.current) return;
     const canvas = canvasRef.current;
-    document.fonts.ready.then(() => drawShareCard(canvas, rsvpForm.name, event.venue, event.date));
+    document.fonts.ready.then(() => drawShareCard(canvas, rsvpForm.name, event.venue, event.date, initialSettings.event_title || "প্ৰিয়বোধী", initialSettings.event_title_sub || "মহোৎসব"));
   }, [rsvpState]);
 
   function shareCard() {
@@ -453,8 +453,8 @@ export default function HomeClient({ initialSettings }: { initialSettings: Recor
       if (navigator.canShare?.({ files: [file] })) {
         await navigator.share({
           files: [file],
-          title: "প্রিয়বোধী মহোৎসব",
-          text: `জয় গুরু! 🙏\nআমি প্রিয়বোধী মহোৎসব-এ উপস্থিত থাকব।\n📅 20 December 2026\n📍 Alinagar Playground, Bhatar, Purba Burdwan\n\nআপনিও আসুন 👇\nhttps://utsav.databind.in`,
+          title: `${initialSettings.event_title || "প্রিয়বোধী"} ${initialSettings.event_title_sub || "মহোৎসব"}`,
+          text: `জয় গুরু! 🙏\nআমি ${initialSettings.event_title || "প্রিয়বোধী"} ${initialSettings.event_title_sub || "মহোৎসব"}-এ উপস্থিত থাকব।\n📅 ${event.date}\n📍 ${event.venue}\n\nআপনিও আসুন 👇\n${window.location.origin}`,
         });
       } else {
         const a = document.createElement("a");
@@ -599,10 +599,10 @@ export default function HomeClient({ initialSettings }: { initialSettings: Recor
           </div>
 
           <h1 className="event-title splash-title mb-2" style={{ fontSize: "clamp(4rem, 22vw, 6.5rem)", letterSpacing: "0.06em", lineHeight: 1.6 }}>
-            প্ৰিয়বোধী
+            {initialSettings.event_title || "প্ৰিয়বোধী"}
           </h1>
           <p className="shimmer-text font-black mb-10" style={{ fontSize: "clamp(1rem, 4vw, 1.4rem)", letterSpacing: "0.1em" }}>
-            মহোৎসব
+            {initialSettings.event_title_sub || "মহোৎসব"}
           </p>
 
           <div style={{ animation: "tap-pulse 2s ease-in-out infinite" }}>
@@ -656,11 +656,11 @@ export default function HomeClient({ initialSettings }: { initialSettings: Recor
               }}
             />
             <h1 className="event-title relative" style={{ fontSize: "clamp(4rem, 18vw, 7rem)", letterSpacing: "0.06em", lineHeight: 1.3, paddingTop: "0.2em" }}>
-              প্ৰিয়বোধী
+              {initialSettings.event_title || "প্ৰিয়বোধী"}
             </h1>
           </div>
           <h2 className="shimmer-text font-black" style={{ fontSize: "clamp(1.4rem, 6vw, 2rem)", letterSpacing: "0.06em", lineHeight: 1.6, opacity: 0.85 }}>
-            মহোৎসব
+            {initialSettings.event_title_sub || "মহোৎসব"}
           </h2>
           <p className="shimmer-text font-semibold" style={{ fontSize: "clamp(0.7rem, 2.5vw, 0.95rem)", letterSpacing: "0.08em", lineHeight: 1.6 }}>
             প্রথম বর্ষ

@@ -223,6 +223,8 @@ export default function DashboardPage() {
   const [waLog,      setWaLog]      = useState<LogEntry[]>([]);
   const [viewSeries, setViewSeries] = useState<DaySeries[]>([]);
   const [forms,      setForms]      = useState<FormSummary[]>([]);
+  const [eventName,  setEventName]  = useState("প্রিয়বোধী মহোৎসব");
+  const [eventDateIso, setEventDateIso] = useState("2026-12-20");
 
   useEffect(() => {
     function tick() {
@@ -232,12 +234,16 @@ export default function DashboardPage() {
         fetch("/api/wa-log").then(r => r.json()),
         fetch("/api/track/series").then(r => r.json()),
         fetch("/api/forms").then(r => r.json()),
-      ]).then(([t, rv, wl, vs, fm]) => {
+        fetch("/api/settings").then(r => r.json()),
+      ]).then(([t, rv, wl, vs, fm, st]) => {
         setTrack(t);
         setRsvp(rv?.entries ?? []);
         setWaLog(Array.isArray(wl) ? wl : []);
         setViewSeries(Array.isArray(vs) ? vs : []);
         setForms(Array.isArray(fm) ? fm : []);
+        const title = `${st.event_title || "প্রিয়বোধী"} ${st.event_title_sub || "মহোৎসব"}`;
+        setEventName(title);
+        if (st.event_date_iso) setEventDateIso(st.event_date_iso);
       }).catch(() => {});
     }
     tick();
@@ -245,7 +251,7 @@ export default function DashboardPage() {
     return () => clearInterval(id);
   }, []);
 
-  const daysLeft = Math.max(0, Math.ceil((new Date("2026-12-20").getTime() - Date.now()) / 86400000));
+  const daysLeft = Math.max(0, Math.ceil((new Date(eventDateIso).getTime() - Date.now()) / 86400000));
   const days     = last14Days();
   const dayLabels = days.map(d => `${parseInt(d.slice(8))}/${parseInt(d.slice(5, 7))}`);
 
@@ -282,7 +288,7 @@ export default function DashboardPage() {
       }}>
         <div>
           <p style={{ fontSize: 10, color: C.gold, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", margin: 0 }}>Upcoming Event</p>
-          <p style={{ fontSize: 17, fontWeight: 700, color: "#fff", margin: "6px 0 2px" }}>প্রিয়বোধী মহোৎসব</p>
+          <p style={{ fontSize: 17, fontWeight: 700, color: "#fff", margin: "6px 0 2px" }}>{eventName}</p>
           <p style={{ fontSize: 12, color: "#94A3B8", margin: 0 }}>20 December 2026 · Alinagar Playground, Bhatar</p>
         </div>
         <div style={{ background: "rgba(201,169,110,0.12)", border: `1px solid ${C.goldBorder}`, borderRadius: 12, padding: "12px 20px", textAlign: "center", flexShrink: 0 }}>

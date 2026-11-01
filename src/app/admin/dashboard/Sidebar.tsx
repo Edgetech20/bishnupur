@@ -49,7 +49,7 @@ const NAV_GROUPS = [
 const ALL_NAV = NAV_GROUPS.flatMap(g => g.items);
 
 // ── Sidebar ───────────────────────────────────────────────────────────────────
-export default function Sidebar({ children }: { children: React.ReactNode }) {
+export default function Sidebar({ children, eventTitle }: { children: React.ReactNode; eventTitle: string }) {
   const pathname  = usePathname();
   const router    = useRouter();
   const [desktop, setDesktop]     = useState(false);
@@ -127,10 +127,10 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
         display: "flex", alignItems: "center", justifyContent: "center",
         fontSize: 14, fontWeight: 700, color: C.gold,
       }}>
-        প
+        {eventTitle.charAt(0)}
       </div>
       <div>
-        <p style={{ fontSize: 13, fontWeight: 700, color: C.text, lineHeight: 1.2, margin: 0 }}>Priyabodhi</p>
+        <p style={{ fontSize: 13, fontWeight: 700, color: C.text, lineHeight: 1.2, margin: 0 }}>{eventTitle}</p>
         <p style={{ fontSize: 10, color: C.textMuted, marginTop: 1 }}>Admin Panel</p>
       </div>
     </div>
@@ -151,7 +151,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
           </div>
           <div>
             <p style={{ fontSize: 12, fontWeight: 600, color: C.text, margin: 0, lineHeight: 1.2 }}>Admin</p>
-            <p style={{ fontSize: 10, color: C.textMuted, margin: 0 }}>Priyabodhi</p>
+            <p style={{ fontSize: 10, color: C.textMuted, margin: 0 }}>{eventTitle}</p>
           </div>
         </div>
         <button
